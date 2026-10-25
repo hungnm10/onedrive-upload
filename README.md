@@ -21,6 +21,13 @@ python3 ~/.hermes/skills/productivity/onedrive-upload/scripts/upload.py \
   --folder any_bot
 ```
 
-Stdout is JSON with `remote`, `bytes`, and `link`. The link is an anonymous OneDrive share (`https://1drv.ms/...`). The local file is not deleted.
+Stdout is JSON with `remote`, `name`, `bytes`, `mime`, `link`, and `direct`. `link` is the anonymous OneDrive share page (`https://1drv.ms/...`). `direct` is a temporary URL: GET it with no login and the body is the raw file. A PNG response is `image/png`. The local file is not deleted.
+
+Turn an existing share link into a new direct URL:
+
+```bash
+python3 ~/.hermes/skills/productivity/onedrive-upload/scripts/upload.py \
+  --link 'https://1drv.ms/u/...'
+```
 
 `--name` renames the file on OneDrive. `--expire 7d` sets link expiry. `--folder` is required and is a path under the drive root, such as `any_bot` or `any_bot/notes`.
